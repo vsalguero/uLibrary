@@ -6,7 +6,7 @@ const getAllBooks = async (req, res) => {
         res.json(result.rows[0]);
 
     }catch(err){
-        res.json({error: err.message});
+        next(err);
     }
 
 }
@@ -25,7 +25,7 @@ const getBook = async (req, res) => {
         res.json(result.rows[0]);
         
     }catch(err){
-        res.json({error: err.message});
+        next(err);
     }
 }
 
@@ -35,7 +35,7 @@ const createBook = async (req, res) => {
         const result = await pool.query(`INSERT INTO books (title, author, publish_year, genre) values ('${title}', '${author}', '${publish_year}', '${genre}')`);
         res.json(result.rows[0]);
     }catch(err){
-        res.json({error: err.message});
+        next(err);
     }
 }
 
@@ -52,7 +52,7 @@ const deleteBook = async (req, res) => {
         return res.sendStatus(204);
         
     }catch(err){
-        res.json({error: err.message});
+        next(err);
     }    
 }
 
@@ -70,7 +70,7 @@ const updateBook = async (req, res) => {
         return res.json(result.rows[0]);
         
     }catch(err){
-        res.json({error: err.message});
+        next(err);
     }    
 }
 

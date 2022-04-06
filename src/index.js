@@ -6,6 +6,7 @@ const cors = require("cors");
 
 //import routes
 const bookRoutes = require("./routes/books.routes");
+const userRoutes = require("./routes/users.routes");
 const { json } = require("express/lib/response");
 
 const app = express();
@@ -19,6 +20,13 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use(bookRoutes);
+app.use(userRoutes);
+
+app.use((err, req, res, next) => {
+    return res.json({
+        message : err.message
+    })
+});
 
 const port = process.env.PORT;
 
