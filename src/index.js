@@ -6,6 +6,7 @@ const cors = require("cors");
 
 //import routes
 const bookRoutes = require("./routes/books.routes");
+const { json } = require("express/lib/response");
 
 const app = express();
 
@@ -13,6 +14,9 @@ const app = express();
 app.use(cors());
 
 app.use(morgan("dev"));
+
+//for read request with json format
+app.use(express.json());
 
 app.use(bookRoutes);
 

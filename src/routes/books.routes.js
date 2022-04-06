@@ -11,7 +11,7 @@ router.get("/books", getAllBooks);
 /**
  * Get a single book
  */
-router.get("/book/:id", getBook);
+router.get("/books/:id", getBook);
 
 /**
  * Register new book
@@ -21,11 +21,11 @@ router.post("/books", createBook);
 /**
  * Delete one book
  */
-router.delete("/book/:id", deleteBook);
+router.delete("/books/:id", deleteBook);
 
 /**
  * Update one book
  */
-router.put("/book/:id", updateBook);
+router.put("/books/:id", updateBook);
 
 module.exports = router;
