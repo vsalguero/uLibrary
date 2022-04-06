@@ -1,12 +1,16 @@
 const { Router } = require("express");
+const pool = require('../postgresql');
 
 const router = Router();
 
 /**
  * Get list of books
  */
-router.get("/books", (req, res) => {
+router.get("/books", async (req, res) => {
+    const result = await pool.query('select now()');
     res.send("Books");
+    console.log(result);
+
 });
 
 /**
