@@ -1,44 +1,31 @@
 const { Router } = require("express");
-const pool = require('../postgresql');
+const { getAllBooks, getBook, createBook, deleteBook, updateBook } = require('../controllers/books.controller.js');
 
 const router = Router();
 
 /**
  * Get list of books
  */
-router.get("/books", async (req, res) => {
-    const result = await pool.query('select now()');
-    res.send("Books");
-    console.log(result);
-
-});
+router.get("/books", getAllBooks);
 
 /**
  * Get a single book
  */
-router.get("/book/:id", (req, res) => {
-    res.send("Book");
-});
+router.get("/book/:id", getBook);
 
 /**
  * Register new book
  */
-router.post("/books", (req, res) => {
-    res.send("Save a book");
-});
+router.post("/books", createBook);
 
 /**
  * Delete one book
  */
-router.delete("/book/:id", (req, res) => {
-    res.send("Delete one book");
-});
+router.delete("/book/:id", deleteBook);
 
 /**
  * Update one book
  */
-router.put("/book/:id", (req, res) => {
-    res.send("Update one book");
-});
+router.put("/book/:id", updateBook);
 
 module.exports = router;
