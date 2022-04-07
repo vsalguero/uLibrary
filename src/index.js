@@ -7,7 +7,6 @@ const cors = require("cors");
 //import routes
 const bookRoutes = require("./routes/books.routes");
 const userRoutes = require("./routes/users.routes");
-const { json } = require("express/lib/response");
 
 const app = express();
 
@@ -24,7 +23,7 @@ app.use(userRoutes);
 
 app.use((err, req, res, next) => {
     return res.json({
-        message : err.message
+        message: err.message
     })
 });
 
