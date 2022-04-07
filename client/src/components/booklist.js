@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import {Typography, Card, CardContent, Button } from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 
 const BookList = () => {
     const[books, setBooks] = useState([]);
+
+    const navigate = useNavigate();
 
     const loadBooks = async () => {
         const response = await fetch('http://localhost:4000/books');
@@ -41,7 +44,7 @@ const BookList = () => {
                     <Typography>Año de publicación: {book.publish_year}</Typography>
                     <Typography>Género: {book.genre}</Typography>
                     <br />
-                    <Button variant="contained" style={{marginRight: "1rem"}} color="inherit" onClick={() => { console.log("Edit")}}>
+                    <Button variant="contained" style={{marginRight: "1rem"}} color="inherit" onClick={() => { navigate(`/books/${book.id}/edit`)}}>
                         Editar
                     </Button>
                     <Button variant="contained" color="warning" onClick={() => { handleDelete(book.id)}}>

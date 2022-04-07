@@ -13,7 +13,7 @@ const getBook = async (req, res) => {
     const id = req.params.id;
     console.log(id);
     try {
-        const result = await pool.query(`select * from books where id = ${id}`);
+        const result = await pool.query(`select * from books where id = '${id}'`);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 message: "Not found"

@@ -11,7 +11,8 @@ function App() {
       <Container>
         <Routes>
           <Route path='/' element={<BookList />} />
-          <Route path='/book/new' element={<BookForm />} />
+          <Route path='/books/new' element={<BookForm />} />
+          <Route path='/books/:id/edit' element={<BookForm />} />
         </Routes>
       </Container>
 

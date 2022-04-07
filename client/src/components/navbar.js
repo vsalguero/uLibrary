@@ -14,7 +14,7 @@ const NavBar = () => {
                                 uLibrary
                             </Link>
                         </Typography>
-                        <Button variant="contained" onClick={() => navigate("book/new")}>
+                        <Button variant="contained" onClick={() => navigate("books/new")}>
                             New Book
                         </Button>
                     </Toolbar>
