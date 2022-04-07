@@ -10,7 +10,7 @@ const NavBar = () => {
                 <Container>
                     <Toolbar>
                         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                            <Link style={{ textDecoration: "none", color: "#eee" }} to="/">
+                            <Link style={{ textDecoration: "none", color: "black" }} to="/">
                                 uLibrary
                             </Link>
                         </Typography>
