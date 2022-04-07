@@ -6,6 +6,7 @@ import {
   Button,
   CardContent,
   TextField,
+  CircularProgress,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -54,6 +55,7 @@ const BookForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(book),
       });    
+      setLoading(false);
       navigate("/");
     } else {
         //create a new book
@@ -63,9 +65,10 @@ const BookForm = () => {
         headers: { "Content-Type": "application/json" },
       });
       const data = await res.json();
+      setLoading(false);
       navigate("/");
     }    
-    setLoading(false);
+    
     
   };
 
@@ -91,7 +94,7 @@ const BookForm = () => {
           }}
         >
           <Typography>
-            Create Book
+            {editing ? 'Edit Book' : 'Create Book'}
         </Typography>
             <CardContent>
               <form onSubmit={handleSubmit}>
@@ -143,8 +146,13 @@ const BookForm = () => {
                     margin: "1rem 0",
                   }}
                 />
-                <Button variant="contained" type="submit">
-                  Save
+                <Button variant="contained" type="submit"
+                disabled={!book.title || !book.author}>
+                {loading ? (
+                    <CircularProgress color="inherit" size={24} />
+                ) : (
+                    "Save"
+                )}
                 </Button>
               </form>
             </CardContent>
