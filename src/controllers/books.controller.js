@@ -3,7 +3,7 @@ const pool = require('../postgresql');
 const getAllBooks = async (req, res) => {
     try {
         const result = await pool.query("select * from books");
-        res.json(result.rows[0]);
+        res.json(result.rows);
     } catch (err) {
         //next(err);
     }
