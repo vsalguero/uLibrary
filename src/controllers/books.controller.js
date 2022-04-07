@@ -59,7 +59,7 @@ const updateBook = async (req, res) => {
     const { title, author, publish_year, genre } = req.body;
     try {
         const result = await pool.query(
-            `update books set title = '${title}', author = '${author}', publish_year = '${publish_year}', genre = '${genre}' where id = ${id} returning *`);
+            `update books set title = '${title}', author = '${author}', publish_year = '${publish_year}', genre = '${genre}', updated_at =  where id = ${id} returning *`);
         if (result.rows.length === 0) {
             return res.status(404).json({
                 message: "Not found"
