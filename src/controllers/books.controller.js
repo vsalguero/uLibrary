@@ -40,7 +40,7 @@ const createBook = async (req, res) => {
 const deleteBook = async (req, res) => {
     const id = req.params.id;
     try {
-        const result = await pool.query(`delete from books where id = ${id}`);
+        const result = await pool.query(`delete from books where id = '${id}'`);
         console.log(result.rowCount);
         if (result.rowCount === 0) {
             return res.status(404).json({

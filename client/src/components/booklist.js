@@ -11,6 +11,17 @@ const BookList = () => {
         setBooks(data);
     };
 
+    const handleDelete = async(id) => {
+        try{
+            await fetch(`http://localhost:4000/books/${id}`, {
+                method: 'DELETE',
+            });            
+            setBooks(books.filter(book => book.id != id));
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     useEffect(() =>{
         loadBooks()
     }, []);
@@ -33,7 +44,7 @@ const BookList = () => {
                     <Button variant="contained" style={{marginRight: "1rem"}} color="inherit" onClick={() => { console.log("Edit")}}>
                         Editar
                     </Button>
-                    <Button variant="contained" color="warning" onClick={() => { console.log("Eliminar")}}>
+                    <Button variant="contained" color="warning" onClick={() => { handleDelete(book.id)}}>
                         Eliminar
                     </Button>
                 </CardContent>
