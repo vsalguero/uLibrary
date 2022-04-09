@@ -17,6 +17,9 @@ const NavBar = () => {
                         <Button variant="contained" onClick={() => navigate("books/new")}>
                             New Book
                         </Button>
+                        <Button variant="contained" onClick={() => navigate("users/new")}>
+                            Add user
+                        </Button>
                     </Toolbar>
                 </Container>
             </AppBar>

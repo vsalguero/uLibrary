@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Container } from '@mui/material';
 import BookForm from './components/bookform';
 import BookList from './components/booklist';
+import UserForm from './components/userform';
 import Menu from './components/navbar';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path='/' element={<BookList />} />
           <Route path='/books/new' element={<BookForm />} />
+          <Route path='/users/new' element={<UserForm />} />
           <Route path='/books/:id/edit' element={<BookForm />} />
         </Routes>
       </Container>
