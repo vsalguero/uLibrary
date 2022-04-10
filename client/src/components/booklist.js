@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {Typography, Card, CardContent, Button } from '@mui/material';
+import {Typography, Card, Grid, CardContent, Button } from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 
 const BookList = () => {
@@ -32,7 +32,9 @@ const BookList = () => {
     return (
         <>
         <h1>Book List</h1>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {books.map((book) =>(
+             <Grid item xs={4}>
             <Card key={book.id}
             style={{
                 marginBottom: "1rem",
@@ -53,7 +55,9 @@ const BookList = () => {
                 </CardContent>
 
             </Card>
+            </Grid>
         ))}
+        </Grid>
         </>
     );
 }

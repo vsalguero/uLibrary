@@ -56,7 +56,7 @@ const BookForm = () => {
         body: JSON.stringify(book),
       });    
       setLoading(false);
-      navigate("/");
+      navigate("/books/list");
     } else {
         //create a new book
       const res = await fetch("http://localhost:4000/books", {
@@ -64,9 +64,8 @@ const BookForm = () => {
         body: JSON.stringify(book),
         headers: { "Content-Type": "application/json" },
       });
-      const data = await res.json();
       setLoading(false);
-      navigate("/");
+      navigate("/books/list");
     }     
   };
 
