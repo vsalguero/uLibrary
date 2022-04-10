@@ -67,9 +67,7 @@ const BookForm = () => {
       const data = await res.json();
       setLoading(false);
       navigate("/");
-    }    
-    
-    
+    }     
   };
 
   const handleChange = (e) =>

@@ -20,6 +20,9 @@ const NavBar = () => {
                         <Button variant="contained" onClick={() => navigate("users/new")}>
                             Add user
                         </Button>
+                        <Button variant="contained" onClick={() => navigate("users/list")}>
+                            User List
+                        </Button>
                     </Toolbar>
                 </Container>
             </AppBar>

@@ -2,10 +2,11 @@ const pool = require("../postgresql");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
 const getAllUsers = async (req, res) => {
   try {
     const result = await pool.query("select * from users");
-    res.json(result.rows[0]);
+    res.json(result.rows);
   } catch (err) {
     next(err);
   }
@@ -55,7 +56,7 @@ const createUser = async (req, res) => {
         //Inserting data into the database
 
         pool.query(
-          `INSERT INTO users (first_name, last_name, email, password, role) VALUES ('${first_name}', '${last_name}', '${email}', '${password}', '${role}');`,
+          `INSERT INTO users (first_name, last_name, email, password, role) VALUES ('${first_name}', '${last_name}', '${email}', '${user.password}', '${role}');`,
           (err) => {
             if (err) {
               flag = 0; //If user is not inserted is not inserted to database assigning flag as 0/false.

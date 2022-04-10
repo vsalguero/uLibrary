@@ -9,9 +9,7 @@ import {
   CircularProgress,
   FormControl,
   InputLabel,
-  Select,
   NativeSelect,
-  MenuItem
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -60,10 +58,9 @@ const UserForm = () => {
         method: "PUT",
         body: JSON.stringify(user),
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
       });
       setLoading(false);
-      navigate("/");
+      navigate("/users/list");
     } else {
       //create a new User
       const res = await fetch("http://localhost:4000/users", {
@@ -73,10 +70,8 @@ const UserForm = () => {
       });
       const data = await res.json();
       setLoading(false);
-      navigate("/");
+      navigate("/users/list");
     }
-
-
   };
 
   const handleChange = (e) =>
@@ -155,6 +150,7 @@ const UserForm = () => {
                   margin: "1rem 0",
                 }}
               />
+              {!editing ? 
               <TextField
                 fullWidth
                 variant="outlined"
@@ -167,12 +163,15 @@ const UserForm = () => {
                   margin: "1rem 0",
                 }}
               />
+              : ''}
               <FormControl fullWidth>
 
                 <InputLabel variant="standard" htmlFor="role">
                   Role
                 </InputLabel>
                 <NativeSelect
+                value={user.role}
+                onChange={handleChange}
                   inputProps={{
                     name: 'role',
                     id: 'role',
