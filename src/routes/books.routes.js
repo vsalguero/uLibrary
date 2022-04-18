@@ -7,26 +7,26 @@ const router = Router();
 /**
  * Get list of books
  */
-router.get("/books", isLoggedIn, getAllBooks);
+router.get("/books", getAllBooks);
 
 /**
  * Get a single book
  */
-router.get("/books/:id", isLoggedIn, getBook);
+router.get("/books/:id", getBook);
 
 /**
  * Register new book
  */
-router.post("/books", isLoggedIn, createBook);
+router.post("/books", createBook);
 
 /**
  * Delete one book
  */
-router.delete("/books/:id", isLoggedIn, deleteBook);
+router.delete("/books/:id", deleteBook);
 
 /**
  * Update one book
  */
-router.put("/books/:id", isLoggedIn, updateBook);
+router.put("/books/:id", updateBook);
 
 module.exports = router;

@@ -7,26 +7,26 @@ const router = Router();
 /**
  * Get list of users
  */
-router.get("/users", isLoggedIn, getAllUsers);
+router.get("/users", getAllUsers);
 
 /**
  * Get a single user
  */
-router.get("/users/:id", isLoggedIn, getUser);
+router.get("/users/:id", getUser);
 
 /**
- * Register new book
+ * Register new user
  */
-router.post("/users", isLoggedIn, createUser);
+router.post("/users", createUser);
 
 /**
  * Delete one user
  */
-router.delete("/users/:id", isLoggedIn, deleteUser);
+router.delete("/users/:id", deleteUser);
 
 /**
  * Update one user
  */
-router.put("/users/:id", isLoggedIn, updateUserInfo);
+router.put("/users/:id", updateUserInfo);
 
 module.exports = router;

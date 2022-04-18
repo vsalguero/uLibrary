@@ -27,14 +27,19 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-        //create a new book
-      const res = await fetch("http://localhost:4000/login", {
-        method: "POST",
-      });
-      const data = await res.json();
-      setLoading(false);
-      navigate("/");     
+    const res = await fetch("http://localhost:4000/login", {
+      method: "POST",
+      body: JSON.stringify(login),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    if(data.message === "SUCCESS"){
+      alert("You are logged in.");
+      this.goToMain();
+     } else {
+         alert("Please check your login information.");
+     }
+    setLoading(false);     
   };
 
   const handleChange = (e) =>

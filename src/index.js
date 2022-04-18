@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const session = require('express-session');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 
 //import routes
 const bookRoutes = require("./routes/books.routes");
@@ -25,6 +26,8 @@ app.use(morgan("dev"));
 //for read request with json format
 app.use(express.json());
 
+app.use(cookieParser());
+
 //Middlewares
 
   // Authentication configuration
@@ -36,7 +39,7 @@ app.use(session({
 
   app.use(passport.initialize());
   app.use(passport.session());
-  
+
 app.use(bookRoutes);
 app.use(userRoutes);
 app.use(authRoutes);
