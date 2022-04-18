@@ -4,6 +4,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const session = require('express-session');
+const flash = require('connect-flash');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 
@@ -27,6 +28,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use(cookieParser());
+
+app.use(flash());
 
 //Middlewares
 

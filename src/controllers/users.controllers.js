@@ -39,8 +39,10 @@ const createUser = async (req, res) => {
         error: "Email already there, No need to register again.",
       });
     } else {
+
+      const salt = await bcrypt.genSalt(10);
       
-      bcrypt.hash(password, 10, (err, hash) => {
+      bcrypt.hash(password, salt, (err, hash) => {
         if (err)
           res.status(err).json({
             error: "Server error",
@@ -92,6 +94,39 @@ const createUser = async (req, res) => {
   }
 };
 
+
+
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const result = await pool.query(`select * from users where email = '${email}';`);
+    if (result.rows.length > 0) {
+    const user = result.rows[0];
+  
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (validPassword) {
+      res.send({
+        token: 'success'
+      });
+    } else {
+      res.send({
+        token: 'Incorrect password'
+      });
+    }
+  } else {
+    res.send({
+      token: 'The username not exists'
+    });
+  }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: "Database error while Login!" + err, //Database connection error
+    });
+  }
+};
+
+
 const deleteUser = async (req, res) => {
   const id = req.params.id;
   try {
@@ -128,4 +163,4 @@ const updateUserInfo = async (req, res) => {
 
 
 
-module.exports = { getAllUsers, getUser, createUser, deleteUser, updateUserInfo };
+module.exports = { getAllUsers, getUser, createUser, deleteUser, updateUserInfo, login };
