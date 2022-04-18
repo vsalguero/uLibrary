@@ -32,12 +32,7 @@ const NavBar = () => {
                         disableElevation>
                             New user
                         </Button>
-                        <Button 
-                        variant="contained" 
-                        onClick={() => navigate("users/list")}
-                        disableElevation>
-                            User List
-                        </Button>
+                        
                     </Toolbar>
                 </Container>
             </AppBar>
