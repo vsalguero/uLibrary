@@ -29,7 +29,7 @@ const LoginForm = () => {
     e.preventDefault();
     setLoading(true);
         //create a new book
-      const res = await fetch("http://localhost:4000/books", {
+      const res = await fetch("http://localhost:4000/login", {
         method: "POST",
       });
       const data = await res.json();
@@ -84,7 +84,7 @@ const LoginForm = () => {
                 />
                 
                 <Button variant="contained" type="submit"
-                disabled={!login.username || !login.password}>
+                disabled={!login.email || !login.password}>
                 {loading ? (
                     <CircularProgress color="inherit" size={24} />
                 ) : (
