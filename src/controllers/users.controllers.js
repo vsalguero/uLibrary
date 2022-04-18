@@ -32,10 +32,9 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
   const { first_name, last_name, email, password, role } = req.body;
   try {
-    const data = await pool.query(`SELECT * FROM users WHERE email='${email}';`); //Checking if user already exists
-    const arr = data.rows;
-    if (arr.length != 0) {
-      return res.status(400).json({
+    const result = await pool.query(`select * from users where email = '${email}';`);
+    if (result.rows.length > 0) {
+        return res.status(400).json({
         error: "Email already there, No need to register again.",
       });
     } else {

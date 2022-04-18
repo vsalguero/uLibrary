@@ -39,7 +39,7 @@ const LoginForm = () => {
       //alert("You are logged in.");
       navigate("books/list");
      } else {
-         alert("Please check your login information.");
+         alert(result.token);
      }
   });
     setLoading(false);     
