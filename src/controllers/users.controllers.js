@@ -1,7 +1,7 @@
 const pool = require("../postgresql");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const helpers = require("../config/helpers");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -39,6 +39,7 @@ const createUser = async (req, res) => {
         error: "Email already there, No need to register again.",
       });
     } else {
+      
       bcrypt.hash(password, 10, (err, hash) => {
         if (err)
           res.status(err).json({
