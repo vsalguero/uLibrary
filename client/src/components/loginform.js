@@ -8,7 +8,7 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
 
@@ -99,6 +99,12 @@ const LoginForm = () => {
                     "Entrar"
                 )}
                 </Button>
+                <br /><br />
+                <Link style={{color: "blue" }} to="/users/new">
+                                Deseo Registrarme
+                            </Link>
+
+
               </form>
             </CardContent>
         </Card>

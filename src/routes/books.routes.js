@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const { getAllBooks, getBook, createBook, deleteBook, updateBook } = require('../controllers/books.controller.js');
-const { isLoggedIn } = require('../config/auth');
 
 const router = Router();
 
