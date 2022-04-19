@@ -1,6 +1,12 @@
 const { Router } = require("express");
-const { getAllUsers, getUser, createUser, deleteUser, updateUserInfo, login } = require('../controllers/users.controllers.js');
-const { isLoggedIn } = require('../config/auth');
+const {
+  getAllUsers,
+  getUser,
+  createUser,
+  deleteUser,
+  updateUserInfo,
+  login,
+} = require("../controllers/users.controllers.js");
 
 const router = Router();
 

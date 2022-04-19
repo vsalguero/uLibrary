@@ -1,7 +1,4 @@
 const pool = require("../postgresql");
-const jwt = require("jsonwebtoken");
-const helpers = require("../config/helpers");
-const bcryptjs = require("bcryptjs");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -28,7 +25,6 @@ const getUser = async (req, res) => {
     next(err);
   }
 };
-
 
 const deleteUser = async (req, res) => {
   const id = req.params.id;
@@ -63,7 +59,5 @@ const updateUserInfo = async (req, res) => {
     next(err);
   }
 };
-
-
 
 module.exports = { getAllUsers, getUser, deleteUser, updateUserInfo };
