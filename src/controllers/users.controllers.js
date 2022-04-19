@@ -30,37 +30,6 @@ const getUser = async (req, res) => {
 };
 
 
-const login = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const result = await pool.query(`select * from users where email = '${email}';`);
-    if (result.rows.length > 0) {
-    const user = result.rows[0];
-  
-    const validPassword = await bcryptjs.compare(password, user.password);
-    if (validPassword) {
-      res.send({
-        token: 'success'
-      });
-    } else {
-      res.send({
-        token: 'Incorrect password'
-      });
-    }
-  } else {
-    res.send({
-      token: 'The username not exists'
-    });
-  }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      error: "Database error while Login!" + err, //Database connection error
-    });
-  }
-};
-
-
 const deleteUser = async (req, res) => {
   const id = req.params.id;
   try {
@@ -97,4 +66,4 @@ const updateUserInfo = async (req, res) => {
 
 
 
-module.exports = { getAllUsers, getUser, deleteUser, updateUserInfo, login };
+module.exports = { getAllUsers, getUser, deleteUser, updateUserInfo };
