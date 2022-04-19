@@ -63,7 +63,7 @@ const UserForm = () => {
       navigate("/users/list");
     } else {
       //create a new User
-      const res = await fetch("http://localhost:4000/users", {
+      const res = await fetch("http://localhost:4000/register", {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-Type": "application/json" },

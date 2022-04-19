@@ -1,7 +1,7 @@
 const pool = require("../postgresql");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const helpers = require("../config/helpers");
+const bcryptjs = require("bcryptjs");
 
 const getAllUsers = async (req, res) => {
   try {
@@ -29,71 +29,6 @@ const getUser = async (req, res) => {
   }
 };
 
-const createUser = async (req, res) => {
-  const { first_name, last_name, email, password, role } = req.body;
-  try {
-    const result = await pool.query(`select * from users where email = '${email}';`);
-    if (result.rows.length > 0) {
-        return res.status(400).json({
-        error: "Email already there, No need to register again.",
-      });
-    } else {
-
-      const salt = await bcrypt.genSalt(10);
-      
-      bcrypt.hash(password, salt, (err, hash) => {
-        if (err)
-          res.status(err).json({
-            error: "Server error",
-          });
-        const user = {
-          first_name,
-          last_name,
-          email,
-          password: hash,
-          role,
-        };
-        var flag = 1; //Declaring a flag
-
-        //Inserting data into the database
-
-        pool.query(
-          `INSERT INTO users (first_name, last_name, email, password, role) VALUES ('${first_name}', '${last_name}', '${email}', '${user.password}', '${role}');`,
-          (err) => {
-            if (err) {
-              flag = 0; //If user is not inserted is not inserted to database assigning flag as 0/false.
-              console.error(err);
-              return res.status(500).json({
-                error: "Database error",
-              });
-            } else {
-              flag = 1;
-              res
-                .status(200)
-                .send({ message: "User added to database, not verified" });
-            }
-          }
-        );
-        if (flag) {
-          const token = jwt.sign(
-            //Signing a jwt token
-            {
-              email: user.email,
-            },
-            process.env.JWT_KEY
-          );
-        }
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({
-      error: "Database error while registring user!", //Database connection error
-    });
-  }
-};
-
-
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -102,7 +37,7 @@ const login = async (req, res) => {
     if (result.rows.length > 0) {
     const user = result.rows[0];
   
-    const validPassword = await bcrypt.compare(password, user.password);
+    const validPassword = await bcryptjs.compare(password, user.password);
     if (validPassword) {
       res.send({
         token: 'success'
@@ -162,4 +97,4 @@ const updateUserInfo = async (req, res) => {
 
 
 
-module.exports = { getAllUsers, getUser, createUser, deleteUser, updateUserInfo, login };
+module.exports = { getAllUsers, getUser, deleteUser, updateUserInfo, login };

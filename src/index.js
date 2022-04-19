@@ -3,9 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const session = require('express-session');
 const flash = require('connect-flash');
-const passport = require('passport');
 const cookieParser = require('cookie-parser');
 
 //import routes
@@ -17,7 +15,6 @@ const authRoutes = require("./routes/auth.routes");
 
 const app = express();
 
-require('./config/passport');
 
 //avoid compatibility problems with browsers
 app.use(cors());
@@ -34,14 +31,6 @@ app.use(flash());
 //Middlewares
 
   // Authentication configuration
-app.use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: 'ZWXYab' 
-  }));
-
-  app.use(passport.initialize());
-  app.use(passport.session());
 
 app.use(bookRoutes);
 app.use(userRoutes);

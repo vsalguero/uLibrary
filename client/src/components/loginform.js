@@ -12,13 +12,13 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
 
-    const [login, setLogin] = useState({
-        email: "",
-        password: "",
-      });
-  
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
+
   const [loading, setLoading] = useState(false);
-  
+
 
   useEffect(() => {
   });
@@ -27,22 +27,21 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  fetch ("http://localhost:4000/login", {
-     method: "POST",
-     body: JSON.stringify(login),
-     headers: { "Content-Type": "application/json" },
-})
-  .then((response) => response.json())
-  .then((result) => {
-    console.log(result)
-    if(result.token === "success"){
-      //alert("You are logged in.");
-      navigate("books/list");
-     } else {
-         alert(result.token);
-     }
-  });
-    setLoading(false);     
+    fetch("http://localhost:4000/login", {
+      method: "POST",
+      body: JSON.stringify(login),
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((response) => {
+      if (response.data.accessToken) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        navigate("books/list");
+      }
+
+      return response.data;
+    });
+    setLoading(false);
+    
   };
 
   const handleChange = (e) =>
@@ -50,63 +49,63 @@ const LoginForm = () => {
 
   return (
     <Grid
-    container
-    direction="column"
-    alignItems="center"
-    justifyContent="center"> 
+      container
+      direction="column"
+      alignItems="center"
+      justifyContent="center">
       <Grid item xs={6}>
         <Card
           sx={{ mt: 5 }}
           style={{
             backgroundColor: "#fff",
             padding: "1rem",
-    
+
           }}
         >
           <Typography>
             Login
-        </Typography>
-            <CardContent>
-              <form onSubmit={handleSubmit}>
-                <TextField 
-                  variant="outlined"
-                  label="Email"
-                  name="email"
-                  type="email"
-                  onChange={handleChange}
-                  sx={{
-                    display: "block",
-                    margin: "1rem 0",
-                  }}
-                />
-                <TextField
-                  variant="outlined"
-                  name="password"
-                  label="Contraseña"
-                  type="password"
-                  onChange={handleChange}
-                  sx={{
-                    display: "block",
-                    margin: "1rem 0",
-                  }}
-                />
-                
-                <Button variant="contained" type="submit"
+          </Typography>
+          <CardContent>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                variant="outlined"
+                label="Email"
+                name="email"
+                type="email"
+                onChange={handleChange}
+                sx={{
+                  display: "block",
+                  margin: "1rem 0",
+                }}
+              />
+              <TextField
+                variant="outlined"
+                name="password"
+                label="Contraseña"
+                type="password"
+                onChange={handleChange}
+                sx={{
+                  display: "block",
+                  margin: "1rem 0",
+                }}
+              />
+
+              <Button variant="contained" type="submit"
                 disabled={!login.email || !login.password}>
                 {loading ? (
-                    <CircularProgress color="inherit" size={24} />
+                  <CircularProgress color="inherit" size={24} />
                 ) : (
-                    "Entrar"
+                  "Entrar"
                 )}
-                </Button>
-                <br /><br />
-                <Link style={{color: "blue" }} to="/users/new">
-                                Deseo Registrarme
-                            </Link>
+              </Button>
+              <br /><br />
+              <Link style={{ color: "blue" }} to="/users/new">
+                Deseo Registrarme
+              </Link>
 
 
-              </form>
-            </CardContent>
+            </form>
+          </CardContent>
         </Card>
       </Grid>
     </Grid>

@@ -17,7 +17,7 @@ router.get("/users/:id", getUser);
 /**
  * Register new user
  */
-router.post("/users", createUser);
+//router.post("/users", createUser);
 
 /**
  * Delete one user
@@ -29,6 +29,6 @@ router.delete("/users/:id", deleteUser);
  */
 router.put("/users/:id", updateUserInfo);
 
-router.post("/login", login);
+//router.post("/login", login);
 
 module.exports = router;

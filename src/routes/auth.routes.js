@@ -1,16 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const { registerController, loginController } = require("../controllers/auth.controllers.js");
 
 
-const passport = require("passport");
+/**
+ * Register url
+ */
+router.post("/register", registerController);
 
-
-  
-  router.get('/logout', (req, res) => {
-    //cierra la sesión
-    req.logOut();
-    res.redirect('/');
-  });
-
+router.post("/login", loginController);
 
 module.exports = router;
