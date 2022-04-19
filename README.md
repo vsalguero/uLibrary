@@ -18,7 +18,7 @@ Project is created with:
 ## Setup
 To run this project, install it locally using npm:
 
-Server
+### Server
 ```
 $ cd ../uLibrary
 $ npm install
@@ -27,7 +27,7 @@ $ npm run dev
 Runnin in http://localhost:4000
 
 
-Client
+### Client
 ```
 $ cd uLibrary/client
 $ npm install
@@ -35,14 +35,14 @@ $ npm run start
 ```
 Runnin in http://localhost:3000
 
-Database
-You can find the database script in database/db.sql
+### Database
+You can find the database script in ```database/db.sql```
 
-Diagram 
+### ER Diagram 
 <br>
 <img src="https://github.com/vsalguero/files/blob/main/uLibraryBD.jpg">
 
-ScreenShots
+### ScreenShots
 <br>
 <img src="https://github.com/vsalguero/files/blob/main/uLibraryLogin.jpg">
 <br>
