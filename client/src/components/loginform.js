@@ -27,19 +27,26 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:4000/login", {
-      method: "POST",
-      body: JSON.stringify(login),
-      headers: { "Content-Type": "application/json" },
+    await fetch(`http://localhost:4000/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(login)
     })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-        navigate("books/list");
+    .then ((response) => {
+      if(response.status === 401) {
+          throw new Error('Unauthorized');
       }
-
-      return response.data;
-    });
+    })
+    .then((result) => { 
+      //login successfully! 
+      navigate("books/list");
+    })
+    .catch((err) => {
+      console.log();
+    })
     setLoading(false);
     
   };
