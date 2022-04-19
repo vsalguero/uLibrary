@@ -25,6 +25,9 @@ CREATE TABLE loans (
    id SERIAL PRIMARY KEY,                  
    id_user INT NOT NULL,                
    id_book INT NOT NULL,
+   loan_date DATE NOT NULL,
+   limit_date DATE NOT NULL,
+   delivered BOOLEAN DEFAULT 0,
    FOREIGN KEY (id_book)                          
    REFERENCES books (id)                  
    ON DELETE CASCADE,
