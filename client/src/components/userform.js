@@ -19,7 +19,7 @@ const UserForm = () => {
     last_name: "",
     email: "",
     password: "",
-    role: ""
+    role: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ const UserForm = () => {
       last_name: data.last_name,
       email: data.email,
       password: data.password,
-      role: data.role
+      role: data.role,
     });
     setEditing(true);
     console.log(data);
@@ -78,12 +78,7 @@ const UserForm = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
 
   return (
-    <Grid
-      container
-      direction="column"
-
-      spacing={2}
-    >
+    <Grid container direction="column" spacing={2}>
       <Grid item xs={12}>
         <Card
           sx={{ mt: 5 }}
@@ -91,13 +86,10 @@ const UserForm = () => {
             backgroundColor: "#fff",
             padding: "1rem",
             alignItems: "center",
-            justifyContent: "center"
-
+            justifyContent: "center",
           }}
         >
-          <Typography>
-            {editing ? 'Edit User' : 'Create User'}
-          </Typography>
+          <Typography>{editing ? "Edit User" : "Create User"}</Typography>
           <CardContent>
             <form onSubmit={handleSubmit}>
               <TextField
@@ -150,44 +142,51 @@ const UserForm = () => {
                   margin: "1rem 0",
                 }}
               />
-              {!editing ? 
-              <TextField
-                fullWidth
-                variant="outlined"
-                name="confirm_password"
-                label="Confirm Password"
-                type="password"
-                onChange={handleChange}
-                sx={{
-                  display: "block",
-                  margin: "1rem 0",
-                }}
-              />
-              : ''}
+              {!editing ? (
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  name="confirm_password"
+                  label="Confirm Password"
+                  type="password"
+                  onChange={handleChange}
+                  sx={{
+                    display: "block",
+                    margin: "1rem 0",
+                  }}
+                />
+              ) : (
+                ""
+              )}
               <FormControl fullWidth>
-
                 <InputLabel variant="standard" htmlFor="role">
                   Role
                 </InputLabel>
                 <NativeSelect
-                value={user.role}
-                onChange={handleChange}
+                  value={user.role}
+                  onChange={handleChange}
                   inputProps={{
-                    name: 'role',
-                    id: 'role',
+                    name: "role",
+                    id: "role",
                   }}
                 >
                   <option value={"Librarian"}>Librarian</option>
                   <option value={"Student"}>Student</option>
-                  
                 </NativeSelect>
-
               </FormControl>
               <br />
               <br />
 
-              <Button variant="contained" type="submit"
-                disabled={!user.first_name || !user.last_name || !user.email || !user.password}>
+              <Button
+                variant="contained"
+                type="submit"
+                disabled={
+                  !user.first_name ||
+                  !user.last_name ||
+                  !user.email ||
+                  !user.password
+                }
+              >
                 {loading ? (
                   <CircularProgress color="inherit" size={24} />
                 ) : (

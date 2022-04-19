@@ -36,7 +36,6 @@ const BookList = () => {
         {books.map((book) => (
           <Grid item xs={4} key={book.id}>
             <Card
-              
               style={{
                 marginBottom: "1rem",
                 backgroundColor: "#f9f9f9",

@@ -1,68 +1,76 @@
 import { useEffect, useState } from "react";
-import {Typography, Card, CardContent, Button } from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import { Typography, Card, CardContent, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
-    const[users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const loadUsers = async () => {
-        const response = await fetch('http://localhost:4000/users');
-        const data = await response.json();
-        console.log(data)
-        setUsers(data);
-    };
+  const loadUsers = async () => {
+    const response = await fetch("http://localhost:4000/users");
+    const data = await response.json();
+    console.log(data);
+    setUsers(data);
+  };
 
-    const handleDelete = async(id) => {
-        try{
-            await fetch(`http://localhost:4000/users/${id}`, {
-                method: 'DELETE',
-            });            
-            setUsers(users.filter(user => user.id !== id));
-        }catch(error){
-            console.log(error);
-        }
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:4000/users/${id}`, {
+        method: "DELETE",
+      });
+      setUsers(users.filter((user) => user.id !== id));
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    useEffect(() =>{
-        loadUsers()
-    }, []);
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
-    return (
-        <>
-        <h1>User List</h1>
-        {users.map((user) =>(
-            <Card key={user.id}
-            style={{
-                marginBottom: "1rem",
-                backgroundColor: "#f9f9f9"
-            }}>
-                <CardContent>
-                    <Typography>Nombre: {user.first_name}</Typography>
-                    <Typography>Apellido: {user.last_name}</Typography>
-                    <Typography>Email: {user.email}</Typography>
-                    <Typography>Password: ******</Typography>
-                    <Typography>Role: {user.role}</Typography>
-                    <br />
-                    <Button variant="contained" 
-                    style={{marginRight: "1rem"}} 
-                    color="inherit" 
-                    onClick={() => { navigate(`/users/${user.id}/edit`)}}>
-                        Editar                 
-                    </Button>
-                    <Button 
-                    variant="contained" 
-                    color="warning" 
-                    onClick={() => { handleDelete(user.id)}}>
-                        Eliminar
-                    </Button>
-                </CardContent>
-
-            </Card>
-        ))}
-        </>
-    );
-}
+  return (
+    <>
+      <h1>User List</h1>
+      {users.map((user) => (
+        <Card
+          key={user.id}
+          style={{
+            marginBottom: "1rem",
+            backgroundColor: "#f9f9f9",
+          }}
+        >
+          <CardContent>
+            <Typography>Nombre: {user.first_name}</Typography>
+            <Typography>Apellido: {user.last_name}</Typography>
+            <Typography>Email: {user.email}</Typography>
+            <Typography>Password: ******</Typography>
+            <Typography>Role: {user.role}</Typography>
+            <br />
+            <Button
+              variant="contained"
+              style={{ marginRight: "1rem" }}
+              color="inherit"
+              onClick={() => {
+                navigate(`/users/${user.id}/edit`);
+              }}
+            >
+              Editar
+            </Button>
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={() => {
+                handleDelete(user.id);
+              }}
+            >
+              Eliminar
+            </Button>
+          </CardContent>
+        </Card>
+      ))}
+    </>
+  );
+};
 
 export default UserList;
