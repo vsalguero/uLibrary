@@ -1,65 +1,79 @@
 import { useEffect, useState } from "react";
-import {Typography, Card, Grid, CardContent, Button } from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import { Typography, Card, Grid, CardContent, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const BookList = () => {
-    const[books, setBooks] = useState([]);
+  const [books, setBooks] = useState([]);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const loadBooks = async () => {
-        const response = await fetch('http://localhost:4000/books');
-        const data = await response.json();
-        console.log(data)
-        setBooks(data);
-    };
+  const loadBooks = async () => {
+    const response = await fetch("http://localhost:4000/books");
+    const data = await response.json();
+    console.log(data);
+    setBooks(data);
+  };
 
-    const handleDelete = async(id) => {
-        try{
-            await fetch(`http://localhost:4000/books/${id}`, {
-                method: 'DELETE',
-            });            
-            setBooks(books.filter(book => book.id != id));
-        }catch(error){
-            console.log(error);
-        }
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:4000/books/${id}`, {
+        method: "DELETE",
+      });
+      setBooks(books.filter((book) => book.id != id));
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    useEffect(() =>{
-        loadBooks()
-    }, []);
+  useEffect(() => {
+    loadBooks();
+  }, []);
 
-    return (
-        <>
-        <h1>Book List</h1>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        {books.map((book) =>(
-             <Grid item xs={4}>
-            <Card key={book.id}
-            style={{
+  return (
+    <>
+      <h1>Book List</h1>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        {books.map((book) => (
+          <Grid item xs={4} key={book.id}>
+            <Card
+              
+              style={{
                 marginBottom: "1rem",
-                backgroundColor: "#f9f9f9"
-            }}>
-                <CardContent>
-                    <Typography>Título: {book.title}</Typography>
-                    <Typography>Autor: {book.author}</Typography>
-                    <Typography>Año de publicación: {book.publish_year}</Typography>
-                    <Typography>Género: {book.genre}</Typography>
-                    <br />
-                    <Button variant="contained" style={{marginRight: "1rem"}} color="inherit" onClick={() => { navigate(`/books/${book.id}/edit`)}}>
-                        Editar
-                    </Button>
-                    <Button variant="contained" color="warning" onClick={() => { handleDelete(book.id)}}>
-                        Eliminar
-                    </Button>
-                </CardContent>
-
+                backgroundColor: "#f9f9f9",
+              }}
+            >
+              <CardContent>
+                <Typography>Título: {book.title}</Typography>
+                <Typography>Autor: {book.author}</Typography>
+                <Typography>Año de publicación: {book.publish_year}</Typography>
+                <Typography>Género: {book.genre}</Typography>
+                <br />
+                <Button
+                  variant="contained"
+                  style={{ marginRight: "1rem" }}
+                  color="inherit"
+                  onClick={() => {
+                    navigate(`/books/${book.id}/edit`);
+                  }}
+                >
+                  Editar
+                </Button>
+                <Button
+                  variant="contained"
+                  color="warning"
+                  onClick={() => {
+                    handleDelete(book.id);
+                  }}
+                >
+                  Eliminar
+                </Button>
+              </CardContent>
             </Card>
-            </Grid>
+          </Grid>
         ))}
-        </Grid>
-        </>
-    );
-}
+      </Grid>
+    </>
+  );
+};
 
 export default BookList;
