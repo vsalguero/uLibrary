@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { requireAuth} from "../helpers/verifyauth";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
 
 const BookForm = () => {
   const [book, setBook] = useState({
@@ -58,6 +61,11 @@ const BookForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(book),
       });
+      Swal.fire(
+        'Correcto!',
+        'El libro ha sido modificado!',
+        'success'
+      );
       setLoading(false);
       navigate("/books/list");
     } else {
@@ -67,6 +75,11 @@ const BookForm = () => {
         body: JSON.stringify(book),
         headers: { "Content-Type": "application/json" },
       });
+      Swal.fire(
+        'Correcto!',
+        'Libro registrado exitosamente!',
+        'success'
+      );
       setLoading(false);
       navigate("/books/list");
     }

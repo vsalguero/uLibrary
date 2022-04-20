@@ -12,7 +12,7 @@ import {
   NativeSelect,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import { requireAuth} from "../helpers/verifyauth";
+import Swal from 'sweetalert2';
 
 const UserForm = () => {
   const [user, setUser] = useState({
@@ -62,6 +62,11 @@ const UserForm = () => {
         body: JSON.stringify(user),
         headers: { "Content-Type": "application/json" },
       });
+      Swal.fire(
+        'Correcto!',
+        'El usuario ha sido modificado!',
+        'success'
+      )
       setLoading(false);
       navigate("/users/list");
     } else {
@@ -74,10 +79,18 @@ const UserForm = () => {
         console.log(response.status);
         if (response.status === 400) {
           setLoading(false); 
-          alert("Ya existe un usuario con ese correo electrónico registrado")
+          Swal.fire(
+            'Ooops!',
+            'Ya existe un usuario con ese correo electrónico registrado',
+            'error'
+          )
           throw new Error("Unauthorized");
         }    
-        
+        Swal.fire(
+          'Éxito!',
+          'Usuario creado correctamente!',
+          'success'
+        )
       });
       setLoading(false);
       navigate("/");

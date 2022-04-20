@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Typography, Card, Grid, CardContent, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { requireAuth} from "../helpers/verifyauth";
+import { requireAuth } from "../helpers/verifyauth";
+import Swal from 'sweetalert2';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -17,13 +18,30 @@ const BookList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:4000/books/${id}`, {
-        method: "DELETE",
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:4000/books/${id}`, {
+            method: "DELETE",
+          });
+          setBooks(books.filter((book) => book.id != id));
+          Swal.fire(
+            'Deleted!',
+            'Libro eliminado.',
+            'success'
+          );
+        }
       });
-      setBooks(books.filter((book) => book.id != id));
     } catch (error) {
       console.log(error);
     }
+
   };
 
   useEffect(() => {

@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { verifyAuth } from "../helpers/verifyauth.js";
+import Swal from 'sweetalert2';
 
 const LoginForm = () => {
   const [login, setLogin] = useState({
@@ -39,10 +40,18 @@ const LoginForm = () => {
       body: JSON.stringify(login),
     }).then((response) => {
       if (response.status === 404) {
-        alert("Usuario no encontrado")
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Usuario no registrado!'
+        })
         throw new Error("Unauthorized");
       }else if (response.status === 401) {
-        alert("Contraseña incorrecta")
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Contraseña incorrecta!'
+        })
         throw new Error("Unauthorized");
       }else if (response.status === 200){
         return response.json();
