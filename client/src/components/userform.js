@@ -70,6 +70,14 @@ const UserForm = () => {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-Type": "application/json" },
+      }).then((response) => {
+        console.log(response.status);
+        if (response.status === 400) {
+          setLoading(false); 
+          alert("Ya existe un usuario con ese correo electrónico registrado")
+          throw new Error("Unauthorized");
+        }    
+        
       });
       const data = await res.json();
       setLoading(false);

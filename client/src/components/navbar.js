@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const navigate = useNavigate();
+    
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -21,6 +22,7 @@ const NavBar = () => {
                 uLibrary
               </Link>
             </Typography>
+            { sessionStorage.getItem('jwtToken') &&
             <Button
               variant="contained"
               onClick={() => navigate("books/new")}
@@ -28,6 +30,8 @@ const NavBar = () => {
             >
               New Book
             </Button>
+            }
+            { sessionStorage.getItem('jwtToken') &&
             <Button
               variant="contained"
               onClick={() => navigate("books/list")}
@@ -35,13 +39,16 @@ const NavBar = () => {
             >
               List of Books
             </Button>
+            }
+            { sessionStorage.getItem('jwtToken') &&
             <Button
               variant="contained"
               onClick={() => navigate("users/new")}
               disableElevation
             >
               New user
-            </Button>
+            </Button> 
+            }
           </Toolbar>
         </Container>
       </AppBar>
