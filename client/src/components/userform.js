@@ -45,8 +45,6 @@ const UserForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    //if not login redirect to login page
-    requireAuth(navigate);
     if (params.id) {
       loadUser(params.id);
     }
