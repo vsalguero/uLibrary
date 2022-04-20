@@ -11,6 +11,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { verifyAuth } from "../helpers/verifyauth.js";
 import Swal from 'sweetalert2';
+import { PUBLIC_URL } from '../helpers/globals'
 
 const LoginForm = () => {
   const [login, setLogin] = useState({
@@ -31,7 +32,7 @@ const LoginForm = () => {
   //Login request
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch(`http://localhost:4000/login`, {
+    await fetch(`${PUBLIC_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -11,8 +11,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { requireAuth} from "../helpers/verifyauth";
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-const MySwal = withReactContent(Swal);
+import { PUBLIC_URL } from '../helpers/globals'
 
 const BookForm = () => {
   const [book, setBook] = useState({
@@ -28,7 +27,7 @@ const BookForm = () => {
   const params = useParams();
 
   const loadBook = async (id) => {
-    const result = await fetch(`http://localhost:4000/books/${id}`);
+    const result = await fetch(`${PUBLIC_URL}/books/${id}`);
     const data = await result.json();
     setBook({
       title: data.title,
@@ -55,7 +54,7 @@ const BookForm = () => {
     setLoading(true);
     if (editing) {
       //update the data
-      await fetch(`http://localhost:4000/books/${params.id}`, {
+      await fetch(`${PUBLIC_URL}/books/${params.id}`, {
         method: "PUT",
         body: JSON.stringify(book),
         headers: { "Content-Type": "application/json" },
@@ -70,7 +69,7 @@ const BookForm = () => {
       navigate("/books/list");
     } else {
       //create a new book
-      const res = await fetch("http://localhost:4000/books", {
+      const res = await fetch(`${PUBLIC_URL}/books`, {
         method: "POST",
         body: JSON.stringify(book),
         headers: { "Content-Type": "application/json" },
