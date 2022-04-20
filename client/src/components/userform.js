@@ -42,6 +42,8 @@ const UserForm = () => {
     console.log(data);
   };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     //if not login redirect to login page
     requireAuth(navigate);
@@ -50,7 +52,7 @@ const UserForm = () => {
     }
   }, [params.id]);
 
-  const navigate = useNavigate();
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

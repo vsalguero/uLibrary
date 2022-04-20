@@ -37,6 +37,8 @@ const BookForm = () => {
     console.log(data);
   };
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     //if not login redirect to login page
     requireAuth(navigate);
@@ -44,8 +46,6 @@ const BookForm = () => {
       loadBook(params.id);
     }
   }, [params.id]);
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
