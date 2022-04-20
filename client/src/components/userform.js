@@ -12,6 +12,7 @@ import {
   NativeSelect,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import { requireAuth} from "../helpers/verifyauth";
 
 const UserForm = () => {
   const [user, setUser] = useState({
@@ -42,6 +43,8 @@ const UserForm = () => {
   };
 
   useEffect(() => {
+    //if not login redirect to login page
+    requireAuth(navigate);
     if (params.id) {
       loadUser(params.id);
     }

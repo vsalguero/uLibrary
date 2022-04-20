@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Typography, Card, Grid, CardContent, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { requireAuth} from "../helpers/verifyauth";
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -26,6 +27,8 @@ const BookList = () => {
   };
 
   useEffect(() => {
+    //if not login redirect to login page
+    requireAuth(navigate);
     loadBooks();
   }, []);
 

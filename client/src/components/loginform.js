@@ -9,6 +9,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import { verifyAuth } from "../helpers/verifyauth.js";
 
 const LoginForm = () => {
   const [login, setLogin] = useState({
@@ -18,10 +19,15 @@ const LoginForm = () => {
 
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {});
-
   const navigate = useNavigate();
 
+  useEffect(() => {
+    //if is login redirect to home page
+    verifyAuth(navigate);
+
+  }); 
+  
+  //Login request
   const handleSubmit = async (e) => {
     e.preventDefault();
     await fetch(`http://localhost:4000/login`, {
@@ -31,16 +37,23 @@ const LoginForm = () => {
         Accept: "application/json",
       },
       body: JSON.stringify(login),
+    }).then((response) => {
+      if (response.status === 404) {
+        alert("Usuario no encontrado")
+        throw new Error("Unauthorized");
+      }else if (response.status === 401) {
+        alert("Contraseña incorrecta")
+        throw new Error("Unauthorized");
+      }else if (response.status === 200){
+        return response.json();
+      }      
     })
-      .then((response) => {
-        if (response.status === 401) {
-          throw new Error("Unauthorized");
-        }
-      })
-      .then((result) => {
-        //login successfully!
-        navigate("books/list");
-      })
+    .then(data => {
+      //login successfully!
+      //create session with the token
+      sessionStorage.setItem("jwtToken", data.token);
+      navigate("books/list");
+    })
       .catch((err) => {
         console.log();
       });

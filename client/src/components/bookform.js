@@ -9,6 +9,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import { requireAuth} from "../helpers/verifyauth";
 
 const BookForm = () => {
   const [book, setBook] = useState({
@@ -37,6 +38,8 @@ const BookForm = () => {
   };
 
   useEffect(() => {
+    //if not login redirect to login page
+    requireAuth(navigate);
     if (params.id) {
       loadBook(params.id);
     }
