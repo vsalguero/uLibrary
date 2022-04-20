@@ -79,7 +79,6 @@ const UserForm = () => {
         }    
         
       });
-      const data = await res.json();
       setLoading(false);
       navigate("/");
     }
