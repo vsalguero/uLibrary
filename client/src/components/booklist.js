@@ -3,6 +3,7 @@ import { Typography, Card, Grid, CardContent, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { requireAuth } from "../helpers/verifyauth";
 import Swal from 'sweetalert2';
+import { PUBLIC_URL } from '../helpers/globals'
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -10,7 +11,7 @@ const BookList = () => {
   const navigate = useNavigate();
 
   const loadBooks = async () => {
-    const response = await fetch(`/books`);
+    const response = await fetch(`${PUBLIC_URL}/books`);
     const data = await response.json();
     console.log(data);
     setBooks(data);
@@ -27,7 +28,7 @@ const BookList = () => {
         confirmButtonText: 'Yes!'
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`/books/${id}`, {
+          fetch(`${PUBLIC_URL}/books/${id}`, {
             method: "DELETE",
           });
           setBooks(books.filter((book) => book.id != id));
