@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const flash = require("connect-flash");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 //import routes
 const bookRoutes = require("./routes/books.routes");
@@ -12,6 +13,14 @@ const userRoutes = require("./routes/users.routes");
 const authRoutes = require("./routes/auth.routes");
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+if(process.env.NODE_ENV === "production"){
+  //server static content
+  //npm run build
+  app.use(express.static(path.join(__dirname, "../client/build")));
+}
 
 //avoid compatibility problems with browsers
 app.use(cors());
@@ -24,6 +33,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(flash());
+
+//validate is production
 
 //Middlewares
 
