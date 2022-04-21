@@ -8,14 +8,13 @@ import {
   Button,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { PUBLIC_URL } from '../helpers/globals'
 
 const NavBar = () => {
   const navigate = useNavigate();
 
   //logout function
   const logout = async () => {
-    let result = await fetch(`${PUBLIC_URL}/logout`,
+    let result = await fetch(`/logout`,
       {
         method: "GET",
         headers: {
