@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { Typography, Card, CardContent, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { requireAuth} from "../helpers/verifyauth";
-import { PUBLIC_URL } from '../helpers/globals'
 const UserList = () => {
   const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
 
   const loadUsers = async () => {
-    const response = await fetch(`${PUBLIC_URL}/users`);
+    const response = await fetch(`/users`);
     const data = await response.json();
     console.log(data);
     setUsers(data);
@@ -17,7 +16,7 @@ const UserList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`${PUBLIC_URL}/users/${id}`, {
+      await fetch(`/users/${id}`, {
         method: "DELETE",
       });
       setUsers(users.filter((user) => user.id !== id));

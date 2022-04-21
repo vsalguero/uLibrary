@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines":{
+    "node": "16.14.2",
+    "npm" : "8.5.0"
+  },
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
@@ -27,5 +31,6 @@
   "devDependencies": {
     "nodemon": "^2.0.15"
     
-  }
+  },
+  "proxy" : "http://localhost:4000"
 }

@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from 'sweetalert2';
-import { PUBLIC_URL } from '../helpers/globals'
 
 const UserForm = () => {
   const [user, setUser] = useState({
@@ -30,7 +29,7 @@ const UserForm = () => {
   const params = useParams();
 
   const loadUser = async (id) => {
-    const result = await fetch(`${PUBLIC_URL}/users/${id}`);
+    const result = await fetch(`/users/${id}`);
     const data = await result.json();
     setUser({
       first_name: data.first_name,
@@ -58,7 +57,7 @@ const UserForm = () => {
     setLoading(true);
     if (editing) {
       //update the data
-      await fetch(`${PUBLIC_URL}/users/${params.id}`, {
+      await fetch(`/users/${params.id}`, {
         method: "PUT",
         body: JSON.stringify(user),
         headers: { "Content-Type": "application/json" },
@@ -72,7 +71,7 @@ const UserForm = () => {
       navigate("/users/list");
     } else {
       //create a new User
-      const res = await fetch(`${PUBLIC_URL}/register`, {
+      const res = await fetch(`/register`, {
         method: "POST",
         body: JSON.stringify(user),
         headers: { "Content-Type": "application/json" },
