@@ -98,7 +98,7 @@ const BookForm = () => {
             justifyContent: "center",
           }}
         >
-          <Typography>{editing ? "Edit Book" : "Create Book"}</Typography>
+          <h1>{editing ? "Edit Book" : "Create Book"}</h1>
           <CardContent>
             <form onSubmit={handleSubmit}>
               <TextField

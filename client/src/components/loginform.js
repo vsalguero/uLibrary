@@ -87,7 +87,7 @@ const LoginForm = () => {
             padding: "1rem",
           }}
         >
-          <Typography>Login</Typography>
+          <h2>Login</h2>
           <CardContent>
             <form onSubmit={handleSubmit}>
               <TextField

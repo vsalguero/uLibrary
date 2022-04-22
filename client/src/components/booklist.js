@@ -3,7 +3,8 @@ import { Typography, Card, Grid, CardContent, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { requireAuth } from "../helpers/verifyauth";
 import Swal from 'sweetalert2';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 const BookList = () => {
   const [books, setBooks] = useState([]);
 
@@ -63,20 +64,20 @@ const BookList = () => {
               }}
             >
               <CardContent>
-                <Typography>Título: {book.title}</Typography>
-                <Typography>Autor: {book.author}</Typography>
-                <Typography>Año de publicación: {book.publish_year}</Typography>
-                <Typography>Género: {book.genre}</Typography>
+                <h2>{book.title}</h2>
+                <Typography>Autor: <strong>{book.author}</strong></Typography>
+                <Typography>Año de publicación: <strong>{book.publish_year}</strong></Typography>
+                <Typography>Género: <strong>{book.genre}</strong></Typography>
                 <br />
                 <Button
                   variant="contained"
                   style={{ marginRight: "1rem" }}
-                  color="inherit"
+                  color="primary"
                   onClick={() => {
                     navigate(`/books/${book.id}/edit`);
                   }}
                 >
-                  Editar
+                  <EditIcon />
                 </Button>
                 <Button
                   variant="contained"
@@ -85,7 +86,7 @@ const BookList = () => {
                     handleDelete(book.id);
                   }}
                 >
-                  Eliminar
+                <DeleteIcon />
                 </Button>
               </CardContent>
             </Card>

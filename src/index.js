@@ -14,8 +14,6 @@ const authRoutes = require("./routes/auth.routes");
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "../client/build")));
-
 if(process.env.NODE_ENV === "production"){
   //server static content
   //npm run build

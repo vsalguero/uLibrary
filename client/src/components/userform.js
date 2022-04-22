@@ -112,7 +112,7 @@ const UserForm = () => {
             justifyContent: "center",
           }}
         >
-          <Typography>{editing ? "Edit User" : "Create User"}</Typography>
+          <h1>{editing ? "Edit User" : "Create User"}</h1>
           <CardContent>
             <form onSubmit={handleSubmit}>
               <TextField
