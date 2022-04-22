@@ -10,10 +10,10 @@ const { Pool } = require("pg");
 
 //PG Server in heroku using DATABASE_URL
 const db = new Pool({
-  connectionString: process.env.DATABASE_URL
-  /*ssl: {
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
     rejectUnauthorized: false
-  }*/
+  }
 });
 
 module.exports = db;
