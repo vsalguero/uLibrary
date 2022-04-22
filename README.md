@@ -45,9 +45,9 @@ You can find the database script in ```database/db.sql```
 
 ### ScreenShots
 <br>
-<img src="https://github.com/vsalguero/files/blob/main/uLibraryLogin.jpg">
+<img src="https://github.com/vsalguero/files/blob/main/Login.jpg">
 <br>
-<img src="https://github.com/vsalguero/files/blob/main/uLibraryBooks.jpg">
+<img src="https://github.com/vsalguero/files/blob/main/Books.jpg">
 <br>
-<img src="https://github.com/vsalguero/files/blob/main/uLibraryNewBook.jpg">
+<img src="https://github.com/vsalguero/files/blob/main/SaveBook.jpg">
 
