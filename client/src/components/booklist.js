@@ -54,9 +54,9 @@ const BookList = () => {
   return (
     <>
       <h1>Book List</h1>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Grid container rowSpacing={1} columns={{ xs: 4, sm: 12, md: 12 }} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {books.map((book) => (
-          <Grid item xs={4} key={book.id}>
+          <Grid item xs={4} sm={6} md={4} key={book.id}>
             <Card
               style={{
                 marginBottom: "1rem",

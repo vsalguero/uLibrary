@@ -53,7 +53,7 @@ const NavBar = () => {
                 onClick={() => navigate("books/list")}
                 disableElevation
               >
-                List of Books
+                Books
               </Button>
             }
             {sessionStorage.getItem('jwtToken') &&
